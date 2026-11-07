@@ -8,7 +8,7 @@
 > previous one.
 
 **Progress is tracked on GitHub**, not in this file: one issue per task in milestone
-[001 — Optional core](https://github.com/igortessaro/tessaro-optional/milestone/1), labelled `task`.
+[001 — Optional core](https://github.com/igortessaro/tessaro-optional/milestone/1), labelled `task`, on the [Tessaro.Optional board](https://github.com/users/igortessaro/projects/3).
 This file holds the *what* of each task; the issue holds its *state* (one source of truth each).
 
 ---
@@ -98,8 +98,9 @@ with `gh api` (same PR).
 
 **Done when:** the PR shows all three checks green, and the ruleset lists them as required.
 
-**Note:** if the test runner fails because the test project has no tests yet, add the test
-infrastructure only and move the coverage threshold switch-on to T03 — record it in the PR.
+**Note (confirmed in T01):** with zero tests, Microsoft.Testing.Platform exits with code 8, so the
+`build-test` job cannot be green until T03 adds tests. Decide at the start of T02 between
+(a) `--ignore-exit-code 8` until T03 removes it, or (b) running T03 before T02.
 
 PR: `ci: add CI pipeline with format, tests, coverage and SonarCloud`.
 
