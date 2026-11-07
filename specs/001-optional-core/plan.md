@@ -19,7 +19,8 @@
 | Solution format | `Tessaro.Optional.slnx` | Default format of the .NET 10 SDK; diff-friendly XML |
 | Runtime dependencies | None | Constitution VI |
 | Test framework | xUnit v3 + Shouldly | Owner decision (FluentAssertions is commercial since v8) |
-| Coverage | coverlet (`coverlet.msbuild`), OpenCover format | Supported by SonarCloud; enforces a hard threshold locally and in CI |
+| Test platform | Microsoft.Testing.Platform (MTP), opted in via `global.json` | Required: xUnit v3 4.x on the .NET 10 SDK no longer supports VSTest (amended 2026-11-07, T01) |
+| Coverage | coverlet (`coverlet.MTP`), OpenCover format | Supported by SonarCloud; `--coverlet-threshold` enforces the gate locally and in CI (was `coverlet.msbuild`, which needs VSTest) |
 | Package management | Central Package Management (`Directory.Packages.props`) | One place for versions; Dependabot-friendly |
 | Versioning | MinVer (version from git tags `vX.Y.Z`) | No version numbers to edit by hand; build-time only |
 
