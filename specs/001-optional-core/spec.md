@@ -1,7 +1,7 @@
 # Spec 001 — Optional core
 
-**Status:** Approved (2026-11-07) · **Created:** 2026-11-07
-**Constitution:** [v1.0.0](../../docs/constitution.md) · **ADRs:** [0001](../../docs/adr/0001-optional-as-readonly-struct.md), [0002](../../docs/adr/0002-naming-and-omitted-members.md)
+**Status:** Implemented (2026-11-08) · **Approved:** 2026-11-07 · **Created:** 2026-11-07
+**Constitution:** [v1.1.0](../../docs/constitution.md) · **ADRs:** [0001](../../docs/adr/0001-optional-as-readonly-struct.md), [0002](../../docs/adr/0002-naming-and-omitted-members.md)
 
 > This spec defines **what** the first release offers and **why**. Signatures, target frameworks
 > and tooling belong in `plan.md`.
@@ -171,8 +171,8 @@ Decided by the owner on 2026-11-07. They may be revisited in a future spec.
 
 ## 9. Review checklist
 
-- [ ] Every Java 8–11 `Optional` member is either covered or listed in §5 with a reason
-- [ ] Every acceptance criterion is testable as written
-- [ ] Nothing in this spec prescribes implementation details
-- [ ] Out-of-scope items are acceptable for v1
+- [x] Every Java 8–11 `Optional` member is either covered or listed in §5 with a reason
+- [x] Every acceptance criterion is testable as written
+- [x] Nothing in this spec prescribes implementation details
+- [x] Out-of-scope items are acceptable for v1
 - [x] Open questions answered or deferred
