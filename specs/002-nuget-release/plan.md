@@ -1,6 +1,6 @@
 # Plan 002 — NuGet release
 
-**Status:** Draft — awaiting owner review · **Created:** 2026-11-08
+**Status:** Approved (2026-11-08) · **Created:** 2026-11-08
 **Spec:** [002 — NuGet release](spec.md) (Approved 2026-11-08) · **Constitution:** [v1.2.0](../../docs/constitution.md)
 
 > This plan defines **how** spec 002 is built: workflows, scripts, repository settings and the
@@ -192,22 +192,22 @@ access to nuget.org. Package metadata (licence, README, URLs, SourceLink, `snupk
 - `dotnet-validate` / NuGet Package Explorer checks in CI — the manual SourceLink check on rc.1 is enough for now.
 - SonarCloud analysis on tag builds — the tagged commit was already analysed on `main`.
 
-## 11. Open questions
+## 11. Resolved questions
 
-Each with a recommendation; "follow the suggestions" accepts them all.
+Decided by the owner on 2026-11-08.
 
-1. **`NUGET_USER` as a secret or a repository variable?** The profile name is not a credential.
-   **Recommendation:** a secret anyway, as Microsoft's docs recommend; it costs nothing.
-2. **Environment and tag ruleset created by Claude with `gh api`** (with your go-ahead), as was
-   done for the `main` ruleset? **Recommendation:** yes; the JSON lives in the repo either way.
-3. **Delete the test tag used for AC-1.3** right after the check? **Recommendation:** yes; it is a
-   throwaway (`v0.0.0-guard.1` on a branch commit) and never reaches nuget.org.
+1. **`NUGET_USER`** — a repository **secret** (set by the owner with `gh secret set NUGET_USER`).
+2. **Environment and tag ruleset** — created by Claude with `gh api`, with the owner's go-ahead
+   in the task; the JSON lives in the repository.
+3. **Test tag for AC-1.3** — `v0.0.0-guard.1` on a branch commit, deleted right after the check.
+
+The nuget.org Trusted Publishing policy (§7 step 1) was created by the owner on 2026-11-08 and is active.
 
 ## 12. Review checklist
 
-- [ ] Every acceptance criterion maps to a job, script or verification row in §3 and §5
-- [ ] Nothing in this plan contradicts the constitution or an ADR
-- [ ] Tooling choices are justified, minimal and free
-- [ ] CI enforces every quality gate in the constitution, including in the release run
-- [ ] Owner-only steps (nuget.org, secrets, tags, approval) are clearly separated
-- [ ] Open questions answered or deferred
+- [x] Every acceptance criterion maps to a job, script or verification row in §3 and §5
+- [x] Nothing in this plan contradicts the constitution or an ADR
+- [x] Tooling choices are justified, minimal and free
+- [x] CI enforces every quality gate in the constitution, including in the release run
+- [x] Owner-only steps (nuget.org, secrets, tags, approval) are clearly separated
+- [x] Open questions answered or deferred
