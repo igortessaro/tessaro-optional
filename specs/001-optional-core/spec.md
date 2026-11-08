@@ -144,8 +144,8 @@ Unless stated otherwise, "throws" means the exception is raised immediately, bef
 
 ## 6. Out of scope (future specs)
 
-- Async variants (`MapAsync`, `FlatMapAsync`, `IfPresentAsync`, …) — candidate spec 002.
-- Collection helpers (`FirstOrEmpty`, `SingleOrEmpty`, `dictionary.GetOptional(key)`) — candidate spec 003.
+- Async variants (`MapAsync`, `FlatMapAsync`, `IfPresentAsync`, …) — candidate future spec.
+- Collection helpers (`FirstOrEmpty`, `SingleOrEmpty`, `dictionary.GetOptional(key)`) — candidate future spec.
 - Serialization (System.Text.Json converter) — separate package.
 - Implicit conversion `T → Optional<T>` — intentionally excluded until a spec proves its value
   (it hides the null-check that `Of`/`OfNullable` make explicit).
