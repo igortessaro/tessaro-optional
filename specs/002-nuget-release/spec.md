@@ -1,7 +1,7 @@
 # Spec 002 — NuGet release
 
-**Status:** Draft — awaiting owner review · **Created:** 2026-11-08
-**Constitution:** [v1.1.0](../../docs/constitution.md) · **ADRs:** none yet
+**Status:** Approved (2026-11-08) · **Created:** 2026-11-08
+**Constitution:** [v1.2.0](../../docs/constitution.md) · **ADRs:** [0005](../../docs/adr/0005-pull-request-title-and-description.md)
 
 > This spec defines **what** a release offers and **why**. Workflows, actions and tooling belong
 > in `plan.md`.
@@ -23,7 +23,7 @@ Everything runs on **free tiers only**.
 **Success looks like:**
 
 ```bash
-git tag v1.0.0 && git push origin v1.0.0     # owner, on a commit of main
+git tag v0.0.1-rc.1 && git push origin v0.0.1-rc.1   # owner, on a commit of main
 # … owner approves the "release" run …
 dotnet add package Tessaro.Optional           # anyone, minutes later
 ```
@@ -70,7 +70,7 @@ Notation: *tag* = a git tag named `v<SemVer>`, e.g. `v1.2.3` or `v1.2.3-rc.1`.
 | AC-3.2 | the published package | a consumer debugs into it | the debugger steps into the exact source of that commit (SourceLink + symbols) |
 | AC-3.3 | the published package | its dependencies are inspected | it has none (spec 001 NFR-1) |
 | AC-3.4 | the published `.nupkg` | its provenance is checked (`gh attestation verify`) | it is attested as built by this repository's release workflow from the tagged commit |
-| AC-3.5 | a version after the first | it removes or changes a public member without a major version bump | the release fails before publishing (breaking-change check against the previous version) |
+| AC-3.5 | a version after the first | it removes or changes a public member without the required version bump — major from `1.0.0` on, at least minor before it (`0.y` → `0.(y+1)`, SemVer §4) | the release fails before publishing (breaking-change check against the previous version) |
 
 ### US-4 — Prepare a release
 
@@ -80,6 +80,16 @@ Notation: *tag* = a git tag named `v<SemVer>`, e.g. `v1.2.3` or `v1.2.3-rc.1`.
 |---|---|---|---|
 | AC-4.1 | members listed in `PublicAPI.Unshipped.txt` | a release is prepared | they are moved to `PublicAPI.Shipped.txt` in a PR merged before tagging |
 | AC-4.2 | the repository docs | the owner wants to release | a release section in `CONTRIBUTING.md` (or the README) lists the steps: preparation PR, tag, approval, verification |
+
+### US-5 — Readable release notes
+
+*As a consumer, I want release notes that say what changed in plain words; they are built from PR titles, so titles must follow the standard ([ADR 0005](../../docs/adr/0005-pull-request-title-and-description.md)).*
+
+| ID | Given | When | Then |
+|---|---|---|---|
+| AC-5.1 | a PR whose title matches `<Context> \| <Imperative summary>` (ADR 0005) | it is opened or its title edited | the title check passes |
+| AC-5.2 | a PR whose title does not match (e.g. `docs: update readme`, lower-case summary, trailing period, over 72 characters) | it is opened or its title edited | the title check fails with the expected format and an example, and the PR cannot be merged |
+| AC-5.3 | a Dependabot PR | it is opened | its title starts with `Deps \| ` and passes the check |
 
 ---
 
@@ -109,30 +119,26 @@ Notation: *tag* = a git tag named `v<SemVer>`, e.g. `v1.2.3` or `v1.2.3-rc.1`.
 - **NFR-4** All quality gates in the constitution apply to the workflow files (actions pinned by
   SHA, least-privilege permissions).
 
-## 8. Open questions
+## 8. Resolved questions
 
-Each with a recommendation; "follow the suggestions" accepts them all.
+Decided by the owner on 2026-11-08.
 
-1. **First published version** — `1.0.0` or `0.x`? **Recommendation:** publish `1.0.0-rc.1`
-   first, to prove the whole pipeline end to end (nuget.org versions can be unlisted but never
-   deleted), then `1.0.0`. The API is fully specified and tested, so it deserves a 1.0 promise.
-2. **Approval step (AC-1.6)** — require the owner's approval in a GitHub environment before
-   publishing? **Recommendation:** yes; free on public repositories, and it turns an accidental
-   tag push into a no-op.
-3. **Reserve the `Tessaro` ID prefix on nuget.org** — free, requested by the owner by e-mail to
-   nuget.org; reserved IDs get a verified badge and nobody else can publish `Tessaro.*`.
-   **Recommendation:** yes, before the first publish (owner-only step, can run in parallel).
-4. **Re-running a release whose version is already published (AC-1.5)** — fail, or skip the push
-   and finish the remaining steps? **Recommendation:** fail (fail fast); a partial run is fixed by
-   hand, which is rare and visible.
-5. **Breaking-change check (AC-3.5)** — include it from the first release? **Recommendation:**
-   yes; it has nothing to compare against for `1.0.0`, and protects every release after it.
+1. **First published version** — **`0.0.1-rc.1`**, then `0.0.1`. `1.0.0` waits until the project
+   is more mature; until then SemVer's `0.y.z` rules apply (AC-3.5).
+2. **Approval step (AC-1.6)** — **yes**, the owner approves each release in a GitHub environment.
+3. **Reserve the `Tessaro` ID prefix on nuget.org** — **yes**, before the first publish
+   (owner-only step).
+4. **Re-running a release whose version is already published (AC-1.5)** — **fail** (fail fast).
+5. **Breaking-change check (AC-3.5)** — **yes**, from the first release.
+6. **PR title standard** — **option A**, `<Context> | <Imperative summary>`
+   ([ADR 0005](../../docs/adr/0005-pull-request-title-and-description.md)), enforced by a CI check
+   (US-5, added on the owner's request).
 
 ## 9. Review checklist
 
-- [ ] Every acceptance criterion is testable as written
-- [ ] Nothing in this spec prescribes implementation details
-- [ ] Every service used is free for this repository
-- [ ] Owner-only steps are identifiable (tag push, approval, nuget.org policy, prefix reservation)
-- [ ] Out-of-scope items are acceptable
-- [ ] Open questions answered or deferred
+- [x] Every acceptance criterion is testable as written
+- [x] Nothing in this spec prescribes implementation details
+- [x] Every service used is free for this repository
+- [x] Owner-only steps are identifiable (tag push, approval, nuget.org policy, prefix reservation)
+- [x] Out-of-scope items are acceptable
+- [x] Open questions answered or deferred

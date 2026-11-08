@@ -15,10 +15,12 @@ A zero-dependency .NET port of Java's `java.util.Optional`.
 - Implement test-first, one task at a time, on a feature branch; open a PR. **Never push to `main`.**
 - Branching: **trunk-based** — short-lived branches off `main`, no `develop`. Branch names use the
   Gitflow prefixes: `feature/NNN-slug` for all planned work, `hotfix/slug`, `release/x.y.z`.
-  Conventional-commit types (`feat`, `ci`, …) go in commit/PR titles, not branch names.
 - To execute a task, use the `sdd-task` skill.
 - Don't add public API that no approved spec requires (YAGNI).
-- Commits: Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`, `ci:`, `chore:`).
+- PR titles: `<Context> | <Imperative summary>` — `Spec NNN (TNN)`, `Spec NNN`, `Hotfix`, `Deps` or `Chore`;
+  description sections Summary, Changes, Testing, Notes for reviewer, Checklist, then `Closes #N`
+  (ADR 0005). Squash subject on `main` = PR title + ` (#PR)`.
+- Branch commits: Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`, `ci:`, `chore:`).
 
 ## Code style
 

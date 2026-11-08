@@ -3,7 +3,7 @@
 > The non-negotiable principles of this project. Every spec, plan, task and pull request
 > is checked against this document. Changing it requires an ADR in `docs/adr/`.
 
-**Version:** 1.1.0 · **Ratified:** 2026-11-07 · **Amended:** 2026-11-07 ([ADR 0003](adr/0003-coverage-target-80.md)) · **Owner:** Igor Tessaro
+**Version:** 1.2.0 · **Ratified:** 2026-11-07 · **Amended:** 2026-11-07 ([ADR 0003](adr/0003-coverage-target-80.md)), 2026-11-08 ([ADR 0005](adr/0005-pull-request-title-and-description.md)) · **Owner:** Igor Tessaro
 
 ---
 
@@ -84,4 +84,7 @@ Each phase is reviewed and approved by the owner before the next one starts.
   required checks green; linear history. Only the owner may merge or bypass.
 - Claude (AI assistant) works exclusively on feature branches and opens pull requests;
   it never pushes to `main`.
-- Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
+- Pull request titles follow `<Context> | <Imperative summary>` (e.g. `Spec 001 (T10) | Document Optional<T> usage`)
+  and descriptions use the sections Summary, Changes, Testing, Notes for reviewer, Checklist
+  ([ADR 0005](adr/0005-pull-request-title-and-description.md)). The squash commit on `main` uses the PR title.
+  Commits on feature branches follow [Conventional Commits](https://www.conventionalcommits.org/).
