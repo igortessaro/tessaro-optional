@@ -8,6 +8,11 @@ Tessaro.Optional<T>.IsEmpty.get -> bool
 Tessaro.Optional<T>.IsPresent.get -> bool
 Tessaro.Optional<T>.Map<TResult>(System.Func<T, TResult?>! mapper) -> Tessaro.Optional<TResult>
 Tessaro.Optional<T>.Optional() -> void
+Tessaro.Optional<T>.Or(System.Func<Tessaro.Optional<T>>! supplier) -> Tessaro.Optional<T>
+Tessaro.Optional<T>.OrElse(T? other) -> T?
+Tessaro.Optional<T>.OrElseGet(System.Func<T>! supplier) -> T
+Tessaro.Optional<T>.OrElseThrow() -> T
+Tessaro.Optional<T>.OrElseThrow<TException>(System.Func<TException!>! exceptionFactory) -> T
 Tessaro.OptionalExtensions
 override Tessaro.Optional<T>.Equals(object? obj) -> bool
 override Tessaro.Optional<T>.GetHashCode() -> int

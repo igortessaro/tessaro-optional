@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Tessaro;
 
 /// <summary>
@@ -12,7 +14,7 @@ namespace Tessaro;
 /// <para>Create instances with <see cref="Optional"/> or <see cref="OptionalExtensions"/>.</para>
 /// </remarks>
 /// <typeparam name="T">The type of the value. It cannot be a nullable type.</typeparam>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "The Java-compatible name is the purpose of this library (ADR 0004). VB.NET callers can escape it as [Optional].")]
+[SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "The Java-compatible name is the purpose of this library (ADR 0004). VB.NET callers can escape it as [Optional].")]
 public readonly partial struct Optional<T> where T : notnull
 {
     private readonly T _value;
@@ -62,5 +64,53 @@ public readonly partial struct Optional<T> where T : notnull
     {
         ArgumentNullException.ThrowIfNull(predicate);
         return IsPresent && predicate(_value) ? this : default;
+    }
+
+    /// <summary>Returns the value if present, otherwise <paramref name="other"/>.</summary>
+    /// <remarks>
+    /// <paramref name="other"/> may be <see langword="null"/>, which bridges back to nullable-aware code.
+    /// </remarks>
+    /// <param name="other">The value to return when this optional is empty.</param>
+    /// <returns>The value, or <paramref name="other"/>.</returns>
+    [return: NotNullIfNotNull(nameof(other))]
+    public T? OrElse(T? other) => IsPresent ? _value : other;
+
+    /// <summary>Returns the value if present, otherwise the result of <paramref name="supplier"/>.</summary>
+    /// <param name="supplier">Produces the fallback value. Not invoked when present.</param>
+    /// <returns>The value, or the supplied fallback.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="supplier"/> is <see langword="null"/>.</exception>
+    public T OrElseGet(Func<T> supplier)
+    {
+        ArgumentNullException.ThrowIfNull(supplier);
+        return IsPresent ? _value : supplier();
+    }
+
+    /// <summary>Returns the value if present, otherwise throws.</summary>
+    /// <returns>The value.</returns>
+    /// <exception cref="InvalidOperationException">This optional is empty.</exception>
+    public T OrElseThrow() => IsPresent ? _value : throw new InvalidOperationException("No value present");
+
+    /// <summary>Returns the value if present, otherwise throws the exception created by <paramref name="exceptionFactory"/>.</summary>
+    /// <typeparam name="TException">The type of the exception to throw.</typeparam>
+    /// <param name="exceptionFactory">Creates the exception to throw. Not invoked when present.</param>
+    /// <returns>The value.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="exceptionFactory"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException"><paramref name="exceptionFactory"/> returned <see langword="null"/>.</exception>
+    public T OrElseThrow<TException>(Func<TException> exceptionFactory) where TException : Exception
+    {
+        ArgumentNullException.ThrowIfNull(exceptionFactory);
+        return IsPresent
+            ? _value
+            : throw (Exception?)exceptionFactory() ?? new InvalidOperationException("The exception factory returned null.");
+    }
+
+    /// <summary>Returns this optional if present, otherwise the optional produced by <paramref name="supplier"/>.</summary>
+    /// <param name="supplier">Produces the fallback optional. Not invoked when present.</param>
+    /// <returns>This optional, or the supplied one.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="supplier"/> is <see langword="null"/>.</exception>
+    public Optional<T> Or(Func<Optional<T>> supplier)
+    {
+        ArgumentNullException.ThrowIfNull(supplier);
+        return IsPresent ? this : supplier();
     }
 }
