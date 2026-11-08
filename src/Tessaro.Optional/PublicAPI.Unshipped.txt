@@ -1,6 +1,7 @@
 #nullable enable
 Tessaro.Optional
 Tessaro.Optional<T>
+Tessaro.Optional<T>.AsEnumerable() -> System.Collections.Generic.IEnumerable<T>!
 Tessaro.Optional<T>.Equals(Tessaro.Optional<T> other) -> bool
 Tessaro.Optional<T>.Filter(System.Func<T, bool>! predicate) -> Tessaro.Optional<T>
 Tessaro.Optional<T>.FlatMap<TResult>(System.Func<T, Tessaro.Optional<TResult>>! mapper) -> Tessaro.Optional<TResult>
@@ -9,12 +10,18 @@ Tessaro.Optional<T>.IfPresentOrElse(System.Action<T>! action, System.Action! emp
 Tessaro.Optional<T>.IsEmpty.get -> bool
 Tessaro.Optional<T>.IsPresent.get -> bool
 Tessaro.Optional<T>.Map<TResult>(System.Func<T, TResult?>! mapper) -> Tessaro.Optional<TResult>
+Tessaro.Optional<T>.Match<TResult>(System.Func<T, TResult>! some, System.Func<TResult>! none) -> TResult
 Tessaro.Optional<T>.Optional() -> void
 Tessaro.Optional<T>.Or(System.Func<Tessaro.Optional<T>>! supplier) -> Tessaro.Optional<T>
 Tessaro.Optional<T>.OrElse(T? other) -> T?
 Tessaro.Optional<T>.OrElseGet(System.Func<T>! supplier) -> T
 Tessaro.Optional<T>.OrElseThrow() -> T
 Tessaro.Optional<T>.OrElseThrow<TException>(System.Func<TException!>! exceptionFactory) -> T
+Tessaro.Optional<T>.Select<TResult>(System.Func<T, TResult?>! selector) -> Tessaro.Optional<TResult>
+Tessaro.Optional<T>.SelectMany<TIntermediate, TResult>(System.Func<T, Tessaro.Optional<TIntermediate>>! selector, System.Func<T, TIntermediate, TResult?>! resultSelector) -> Tessaro.Optional<TResult>
+Tessaro.Optional<T>.SelectMany<TResult>(System.Func<T, Tessaro.Optional<TResult>>! selector) -> Tessaro.Optional<TResult>
+Tessaro.Optional<T>.TryGetValue(out T value) -> bool
+Tessaro.Optional<T>.Where(System.Func<T, bool>! predicate) -> Tessaro.Optional<T>
 Tessaro.OptionalExtensions
 override Tessaro.Optional<T>.Equals(object? obj) -> bool
 override Tessaro.Optional<T>.GetHashCode() -> int
