@@ -31,7 +31,7 @@ Once published:
 dotnet add package Tessaro.Optional
 ```
 
-Everything lives in the `Tessaro` namespace ([ADR 0004](docs/adr/0004-namespace-tessaro.md)):
+Everything lives in the `Tessaro` namespace ([ADR 0004](https://github.com/igortessaro/tessaro-optional/blob/main/docs/adr/0004-namespace-tessaro.md)):
 
 ```csharp
 using Tessaro;
@@ -146,27 +146,28 @@ Optional.Empty<int>().ToString();          // "Optional.empty"
 | — | `Match(some, none)`, `TryGetValue(out v)` | .NET additions |
 
 Every deliberate difference from Java, and the reason for it, is listed in
-[spec 001 §5](specs/001-optional-core/spec.md#5-deliberate-deviations-from-java). In short: `null`
+[spec 001 §5](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/spec.md#5-deliberate-deviations-from-java). In short: `null`
 delegates always throw (fail fast), an optional can never be `null`, and there is no `get()`.
 
 ## Known limitations
 
 - **`Map` to a nullable value type** (a mapper returning `int?`) is not supported yet; use
-  `FlatMap(x => f(x).ToOptional())`. Planned for v1.1 ([spec 001 §8](specs/001-optional-core/spec.md#8-resolved-questions)).
+  `FlatMap(x => f(x).ToOptional())`. Planned for v1.1 ([spec 001 §8](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/spec.md#8-resolved-questions)).
 - **Allocations in LINQ query syntax.** A query with a clause between two `from`s makes the C#
   compiler allocate one small anonymous object per evaluation. The library itself does not
   allocate; on hot paths, use method syntax with a tuple
-  ([plan 001 §3.4](specs/001-optional-core/plan.md#34-behaviour-details-not-stated-in-the-spec)).
+  ([plan 001 §3.4](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/plan.md#34-behaviour-details-not-stated-in-the-spec)).
 - `AsEnumerable()` and `ToString()` allocate by nature.
 
 ## Project docs
 
 This library is built with Spec-Driven Development: every change starts from a written spec.
 
-- [Constitution](docs/constitution.md) — principles and quality gates
-- [Architecture decisions](docs/adr/)
-- [Spec 001 — Optional core](specs/001-optional-core/spec.md) · [plan](specs/001-optional-core/plan.md) · [tasks](specs/001-optional-core/tasks.md)
+- [Constitution](https://github.com/igortessaro/tessaro-optional/blob/main/docs/constitution.md) — principles and quality gates
+- [Architecture decisions](https://github.com/igortessaro/tessaro-optional/tree/main/docs/adr/)
+- [Contributing and releasing](https://github.com/igortessaro/tessaro-optional/blob/main/CONTRIBUTING.md)
+- [Spec 001 — Optional core](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/spec.md) · [plan](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/plan.md) · [tasks](https://github.com/igortessaro/tessaro-optional/blob/main/specs/001-optional-core/tasks.md)
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/igortessaro/tessaro-optional/blob/main/LICENSE)
