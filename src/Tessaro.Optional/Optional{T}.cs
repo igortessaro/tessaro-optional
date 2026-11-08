@@ -113,4 +113,38 @@ public readonly partial struct Optional<T> where T : notnull
         ArgumentNullException.ThrowIfNull(supplier);
         return IsPresent ? this : supplier();
     }
+
+    /// <summary>Invokes <paramref name="action"/> with the value, if present.</summary>
+    /// <param name="action">The action to run with the value. Not invoked when empty.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="action"/> is <see langword="null"/>.</exception>
+    public void IfPresent(Action<T> action)
+    {
+        ArgumentNullException.ThrowIfNull(action);
+        if (IsPresent)
+        {
+            action(_value);
+        }
+    }
+
+    /// <summary>
+    /// Invokes <paramref name="action"/> with the value if present, otherwise invokes <paramref name="emptyAction"/>.
+    /// </summary>
+    /// <param name="action">The action to run with the value.</param>
+    /// <param name="emptyAction">The action to run when this optional is empty.</param>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="action"/> or <paramref name="emptyAction"/> is <see langword="null"/>.
+    /// </exception>
+    public void IfPresentOrElse(Action<T> action, Action emptyAction)
+    {
+        ArgumentNullException.ThrowIfNull(action);
+        ArgumentNullException.ThrowIfNull(emptyAction);
+        if (IsPresent)
+        {
+            action(_value);
+        }
+        else
+        {
+            emptyAction();
+        }
+    }
 }
