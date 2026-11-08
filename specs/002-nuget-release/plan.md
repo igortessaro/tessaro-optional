@@ -155,7 +155,7 @@ access to nuget.org. Package metadata (licence, README, URLs, SourceLink, `snupk
 
 | # | Step | Who |
 |---|---|---|
-| 1 | nuget.org → *Trusted Publishing* → policy: owner `igortessaro`, repository `tessaro-optional`, workflow `release.yml`, environment `release` | **Owner** |
+| 1 | nuget.org → *Trusted Publishing* → policy `Tessaro.Optional`: package owner = the owner's nuget.org profile, repository owner `igortessaro`, repository `tessaro-optional`, workflow `release.yml`, environment `release`, scope "Push new packages and package versions", package `Tessaro.Optional` | **Owner** |
 | 2 | Repository secret `NUGET_USER` = nuget.org profile name (not the e-mail) | **Owner** |
 | 3 | Optional, in parallel: e-mail `account@nuget.org` to reserve the `Tessaro` ID prefix | **Owner** |
 | 4 | Create the `release` environment and the tag ruleset (§3.4) | Claude, with the owner's go-ahead in the task |
@@ -168,7 +168,7 @@ access to nuget.org. Package metadata (licence, README, URLs, SourceLink, `snupk
 |---|---|---|
 | R1 | MinVer or packing behaves differently for a prerelease tag | **Spiked 2026-11-08:** tag `v0.0.1-rc.1` → `Tessaro.Optional.0.0.1-rc.1.nupkg` + `.snupkg`; nuspec has MIT licence expression, README, project URL, repository URL with commit SHA, and empty dependency groups for `net8.0` and `net10.0` |
 | R2 | Package validation does not catch a breaking change, or needs a published baseline | **Spiked 2026-11-08** with a local feed: same API vs baseline `0.0.1` → passes; making `IsEmpty` internal → fails with "API breaking changes found" for both TFMs; no baseline → passes. Baseline is restored from nuget.org in the real run |
-| R3 | Trusted Publishing may not allow the **first** push of a new package ID | Policies have a scope for "new packages"; if the first push is refused anyway, the owner creates a one-off, 1-day, single-package API key as a secret for that push and deletes it afterwards |
+| R3 | Trusted Publishing may not allow the **first** push of a new package ID | **Resolved 2026-11-08:** the nuget.org policy form offers the scope "Push new packages and package versions". The policy uses that scope and the single package `Tessaro.Optional` (least privilege; a future `Tessaro.*` package lives in another repository and gets its own policy) |
 | R4 | Dependabot's title format (`Deps | bump …`) differs from expectations | The `Deps` rule only checks the prefix; the first Dependabot PR confirms the spacing; if wrong, adjust the prefix (one line) |
 | R5 | The CI badge image may be blocked on nuget.org (trusted image domains only) | Checked on the rc.1 page; if blocked, accept it or switch to a badge from an allowed domain |
 | R6 | A spike that packs the real package ID pollutes the global NuGet cache (it happened in R2) | Cache entry removed; future spikes set `NUGET_PACKAGES` to a scratch folder (lesson for `sdd-task`) |
