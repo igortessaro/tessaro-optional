@@ -163,7 +163,7 @@ public static class OptionalExtensions
 | `OrElseThrow(factory)` and `factory()` returns `null` | throws `InvalidOperationException` | Fail fast with a meaningful message instead of `NullReferenceException` (Java throws NPE) |
 | `Map` with a value-type `TResult` | never produces empty from the mapper | `TResult?` is not `Nullable<T>` for unconstrained generics; nullable value types are deferred to v1.1 (spec §8.1) |
 | `AsEnumerable()` | returns `[value]` or `Array.Empty<T>()` | Simplest correct implementation; allocates (excluded from NFR-2, it is an exit to collection-land) |
-| `ToString()` of a present value | `$"Optional[{value}]"` | Same as Java |
+| `ToString()` of a present value | `Optional[value]`, formatted with the invariant culture | Same as Java; invariant culture keeps logs deterministic (e.g. `Optional[1.5]` under pt-BR) — amended 2026-11-08, T04 |
 
 ---
 

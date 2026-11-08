@@ -1,11 +1,17 @@
 #nullable enable
-static Tessaro.Optional.Empty<T>() -> Tessaro.Optional<T>
-static Tessaro.Optional.Of<T>(T value) -> Tessaro.Optional<T>
-static Tessaro.Optional.OfNullable<T>(T? value) -> Tessaro.Optional<T>
-static Tessaro.OptionalExtensions.ToOptional<T>(this T? value) -> Tessaro.Optional<T>
 Tessaro.Optional
 Tessaro.Optional<T>
+Tessaro.Optional<T>.Equals(Tessaro.Optional<T> other) -> bool
 Tessaro.Optional<T>.IsEmpty.get -> bool
 Tessaro.Optional<T>.IsPresent.get -> bool
 Tessaro.Optional<T>.Optional() -> void
 Tessaro.OptionalExtensions
+override Tessaro.Optional<T>.Equals(object? obj) -> bool
+override Tessaro.Optional<T>.GetHashCode() -> int
+override Tessaro.Optional<T>.ToString() -> string!
+static Tessaro.Optional.Empty<T>() -> Tessaro.Optional<T>
+static Tessaro.Optional.Of<T>(T value) -> Tessaro.Optional<T>
+static Tessaro.Optional.OfNullable<T>(T? value) -> Tessaro.Optional<T>
+static Tessaro.Optional<T>.operator !=(Tessaro.Optional<T> left, Tessaro.Optional<T> right) -> bool
+static Tessaro.Optional<T>.operator ==(Tessaro.Optional<T> left, Tessaro.Optional<T> right) -> bool
+static Tessaro.OptionalExtensions.ToOptional<T>(this T? value) -> Tessaro.Optional<T>
