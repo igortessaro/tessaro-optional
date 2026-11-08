@@ -8,11 +8,11 @@ updates:
       test:
         patterns: ["xunit*", "Shouldly", "coverlet*"]
     commit-message:
-      prefix: chore
+      prefix: "Deps |" # PR title standard, ADR 0005; no colon is added after "|"
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     commit-message:
-      prefix: ci
+      prefix: "Deps |"

@@ -93,7 +93,7 @@ published; if a run failed after tagging, the owner deletes that tag (CONTRIBUTI
 ### 3.3 PR title check (`pr-title.yml` + `check-pr-title.sh`)
 
 - Runs on `pull_request` (`opened`, `edited`, `reopened`, `synchronize`); job name `pr-title`;
-  permissions `{}` (it reads only the event payload).
+  permissions `contents: read` (it checks out the repository to run the script; amended 2026-11-08, T01 — the plan said `{}`, which leaves no read access for `actions/checkout`).
 - Rules (ADR 0005), as Bash regular expressions:
   - `^Deps \| [^[:space:]].*$` — Dependabot titles: prefix only.
   - otherwise `^(Spec [0-9]{3}( \(T[0-9]{2}\))?|Hotfix|Chore) \| [A-Z].*[^.[:space:]]$` and at most 72 characters.
