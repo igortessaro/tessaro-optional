@@ -147,4 +147,32 @@ public readonly partial struct Optional<T> where T : notnull
             emptyAction();
         }
     }
+
+    /// <summary>Returns <paramref name="some"/> applied to the value if present, otherwise the result of <paramref name="none"/>.</summary>
+    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <param name="some">Produces the result from the value. Not invoked when empty.</param>
+    /// <param name="none">Produces the result when empty. Not invoked when present.</param>
+    /// <returns>The result of exactly one of the two functions.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="some"/> or <paramref name="none"/> is <see langword="null"/>.
+    /// </exception>
+    public TResult Match<TResult>(Func<T, TResult> some, Func<TResult> none)
+    {
+        ArgumentNullException.ThrowIfNull(some);
+        ArgumentNullException.ThrowIfNull(none);
+        return IsPresent ? some(_value) : none();
+    }
+
+    /// <summary>Gets the value, if present, following the .NET <c>Try</c> pattern.</summary>
+    /// <param name="value">The value when present; otherwise the default value of <typeparamref name="T"/>.</param>
+    /// <returns><see langword="true"/> if this optional holds a value; otherwise <see langword="false"/>.</returns>
+    public bool TryGetValue([MaybeNullWhen(false)] out T value)
+    {
+        value = _value;
+        return IsPresent;
+    }
+
+    /// <summary>Returns a sequence with the value as its only element, or an empty sequence.</summary>
+    /// <returns>A sequence of zero or one element.</returns>
+    public IEnumerable<T> AsEnumerable() => IsPresent ? [_value] : [];
 }
