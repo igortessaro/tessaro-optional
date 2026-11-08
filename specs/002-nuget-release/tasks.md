@@ -1,6 +1,6 @@
 # Tasks 002 — NuGet release
 
-**Status:** Draft — awaiting owner review · **Created:** 2026-11-08
+**Status:** Approved (2026-11-08) · **Created:** 2026-11-08
 **Spec:** [002](spec.md) (Approved 2026-11-08) · **Plan:** [002](plan.md) (Approved 2026-11-08)
 
 > Ordered, small, independently verifiable steps that implement plan 002. Each task is **one
@@ -8,8 +8,7 @@
 > previous one.
 
 **Progress is tracked on GitHub**, not in this file: one issue per task in milestone
-`002 — NuGet release`, labelled `task`, on the [Tessaro.Optional board](https://github.com/users/igortessaro/projects/3).
-Issue numbers are filled in once this list is approved.
+[002 — NuGet release](https://github.com/igortessaro/tessaro-optional/milestone/2), labelled `task`, on the [Tessaro.Optional board](https://github.com/users/igortessaro/projects/3).
 
 ---
 
@@ -40,13 +39,13 @@ Issue numbers are filled in once this list is approved.
 
 | ID | Issue | Task | Covers | Branch |
 |---|---|---|---|---|
-| T00 | (PR) | Spec, plan and this task list; ADR 0005, constitution v1.2.0, PR template | — | `feature/002-nuget-release` |
-| T01 | — | PR title check and script tests in CI | US-5, plan §3.3 | `feature/002-pr-title-check` |
-| T02 | — | Release guard script | AC-1.2, AC-1.3, AC-3.5 (logic) | `feature/002-release-guard` |
-| T03 | — | Release workflow, environment and tag ruleset | US-1, US-2, AC-3.3, AC-3.4, AC-3.5 | `feature/002-release-workflow` |
-| T04 | — | Package page and release routine | AC-3.1, AC-4.2 | `feature/002-release-docs` |
-| T05 | — | Prepare and publish `0.0.1-rc.1` | AC-4.1; run of every US-1/2/3 AC | `feature/002-release-rc1` |
-| T06 | — | Verify, publish `0.0.1` and close spec 002 | all ACs (evidence), closing task | `feature/002-final-review` |
+| T00 | [#22](https://github.com/igortessaro/tessaro-optional/pull/22) (PR) | Spec, plan and this task list; ADR 0005, constitution v1.2.0, PR template | — | `feature/002-nuget-release` |
+| T01 | #23 | PR title check and script tests in CI | US-5, plan §3.3 | `feature/002-pr-title-check` |
+| T02 | #24 | Release guard script | AC-1.2, AC-1.3, AC-3.5 (logic) | `feature/002-release-guard` |
+| T03 | #25 | Release workflow, environment and tag ruleset | US-1, US-2, AC-3.3, AC-3.4, AC-3.5 | `feature/002-release-workflow` |
+| T04 | #26 | Package page and release routine | AC-3.1, AC-4.2 | `feature/002-release-docs` |
+| T05 | #27 | Prepare and publish `0.0.1-rc.1` | AC-4.1; run of every US-1/2/3 AC | `feature/002-release-rc1` |
+| T06 | #28 | Verify, publish `0.0.1` and close spec 002 | all ACs (evidence), closing task | `feature/002-final-review` |
 
 T01–T06 touch `ci.yml`, `README.md` or the rulesets in turn, so they run in sequence.
 
@@ -135,8 +134,8 @@ PR: `Spec 002 (T06) | Verify the release and close spec 002`.
 
 ## Review checklist
 
-- [ ] Every AC in the spec is assigned to a task (run-only ACs: exercised in T05, evidenced in T06)
-- [ ] Every task is one branch / one PR with a clear "done when"
-- [ ] Tasks are in an order where each builds on merged work only
-- [ ] Owner-only steps are called out
-- [ ] Open questions answered or deferred
+- [x] Every AC in the spec is assigned to a task (run-only ACs: exercised in T05, evidenced in T06)
+- [x] Every task is one branch / one PR with a clear "done when"
+- [x] Tasks are in an order where each builds on merged work only
+- [x] Owner-only steps are called out
+- [x] Open questions answered or deferred
