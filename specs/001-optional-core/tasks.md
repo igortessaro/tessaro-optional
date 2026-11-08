@@ -83,7 +83,7 @@ PR: `chore: scaffold solution and build configuration`.
 
 **Goal:** every later PR is checked automatically.
 
-- `.config/dotnet-tools.json` with `dotnet-sonarscanner`
+- `dotnet-tools.json` (repo root, SDK 10 default) with `dotnet-sonarscanner`
 - `.github/workflows/ci.yml` — jobs `format` and `build-test` exactly as plan §6, coverage
   threshold 80 %, Sonar steps skipped when `SONAR_TOKEN` is absent, actions pinned by SHA
 - `.github/dependabot.yml` (nuget + github-actions, weekly), `.github/CODEOWNERS` (`* @igortessaro`),

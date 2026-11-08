@@ -33,7 +33,7 @@ implementation time, and Dependabot keeps them current.
 
 ```
 tessaro-optional/
-├── .config/dotnet-tools.json        # local tools: dotnet-sonarscanner
+├── dotnet-tools.json                # local tools: dotnet-sonarscanner (SDK 10 default location)
 ├── .github/
 │   ├── workflows/ci.yml
 │   ├── rulesets/main.json           # branch ruleset as code (applied with gh api)
