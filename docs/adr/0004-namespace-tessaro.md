@@ -1,6 +1,6 @@
 # ADR 0004 — Public types live in the `Tessaro` namespace
 
-**Status:** Proposed · **Date:** 2026-11-08
+**Status:** Accepted (2026-11-08, PR #14) · **Date:** 2026-11-08
 
 ## Context
 

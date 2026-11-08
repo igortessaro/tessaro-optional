@@ -15,7 +15,9 @@ This file holds the *what* of each task; the issue holds its *state* (one source
 
 ## How each task is done
 
-1. Create the branch named in the task from an up-to-date `main`.
+1. Create the branch named in the task from an up-to-date `main`. The repository is
+   **trunk-based**: short-lived branches off `main`, named with the Gitflow prefixes
+   (`feature/…`, `hotfix/…`, `release/…`); there is no `develop` branch.
 2. **Red** — write the tests for the task's acceptance criteria first, each tagged
    `[Trait("AC", "AC-x.y")]`, and see them fail (or fail to compile).
 3. **Green** — write the simplest code that makes them pass.
@@ -39,17 +41,17 @@ This file holds the *what* of each task; the issue holds its *state* (one source
 
 | ID | Issue | Task | Covers | Branch |
 |---|---|---|---|---|
-| T00 | [#1](https://github.com/igortessaro/tessaro-optional/pull/1) (PR) | This task list | — | `docs/001-tasks` |
-| T01 | #2 | Solution scaffolding | plan §1, §2, §4 | `chore/001-scaffolding` |
-| T02 | #3 | CI pipeline, SonarCloud and required checks | plan §6, §7 | `ci/001-pipeline` |
-| T03 | #4 | Creation and state | US-1, US-2, R1 | `feat/001-creation-and-state` |
-| T04 | #5 | Equality and text | US-7 | `feat/001-equality` |
-| T05 | #6 | Transformations | US-3 | `feat/001-transformations` |
-| T06 | #7 | Extraction with fallback | US-4 | `feat/001-extraction` |
-| T07 | #8 | Side effects | US-5 | `feat/001-side-effects` |
-| T08 | #9 | .NET idioms and LINQ | US-6 | `feat/001-idioms-and-linq` |
-| T09 | #10 | Allocation guarantees | NFR-2 | `test/001-allocations` |
-| T10 | #11 | Documentation and final review | README, CLAUDE.md, spec checklist | `docs/001-final-review` |
+| T00 | [#1](https://github.com/igortessaro/tessaro-optional/pull/1) (PR) | This task list | — | `docs/001-tasks` (pre-Gitflow) |
+| T01 | #2 | Solution scaffolding | plan §1, §2, §4 | `chore/001-scaffolding` (pre-Gitflow) |
+| T02 | #3 | CI pipeline, SonarCloud and required checks | plan §6, §7 | `ci/001-pipeline` (pre-Gitflow) |
+| T03 | #4 | Creation and state | US-1, US-2, R1 | `feat/001-creation-and-state` (pre-Gitflow) |
+| T04 | #5 | Equality and text | US-7 | `feature/001-equality` |
+| T05 | #6 | Transformations | US-3 | `feature/001-transformations` |
+| T06 | #7 | Extraction with fallback | US-4 | `feature/001-extraction` |
+| T07 | #8 | Side effects | US-5 | `feature/001-side-effects` |
+| T08 | #9 | .NET idioms and LINQ | US-6 | `feature/001-idioms-and-linq` |
+| T09 | #10 | Allocation guarantees | NFR-2 | `feature/001-allocations` |
+| T10 | #11 | Documentation and final review | README, CLAUDE.md, spec checklist | `feature/001-final-review` |
 
 T01 → T02 → T03 → T04 → T05 → T06 → T07 → T08 → T09 → T10. T05–T07 don't depend on each other
 logically, but they all edit `Optional{T}.cs`, so they run one after another to avoid conflicts.
