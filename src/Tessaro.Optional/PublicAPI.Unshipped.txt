@@ -2,8 +2,11 @@
 Tessaro.Optional
 Tessaro.Optional<T>
 Tessaro.Optional<T>.Equals(Tessaro.Optional<T> other) -> bool
+Tessaro.Optional<T>.Filter(System.Func<T, bool>! predicate) -> Tessaro.Optional<T>
+Tessaro.Optional<T>.FlatMap<TResult>(System.Func<T, Tessaro.Optional<TResult>>! mapper) -> Tessaro.Optional<TResult>
 Tessaro.Optional<T>.IsEmpty.get -> bool
 Tessaro.Optional<T>.IsPresent.get -> bool
+Tessaro.Optional<T>.Map<TResult>(System.Func<T, TResult?>! mapper) -> Tessaro.Optional<TResult>
 Tessaro.Optional<T>.Optional() -> void
 Tessaro.OptionalExtensions
 override Tessaro.Optional<T>.Equals(object? obj) -> bool

@@ -28,4 +28,39 @@ public readonly partial struct Optional<T> where T : notnull
 
     /// <summary>Gets a value indicating whether this optional holds no value.</summary>
     public bool IsEmpty => !IsPresent;
+
+    /// <summary>
+    /// Applies <paramref name="mapper"/> to the value, if present. A <see langword="null"/> result
+    /// becomes an empty optional.
+    /// </summary>
+    /// <typeparam name="TResult">The type of the mapped value.</typeparam>
+    /// <param name="mapper">The function to apply to the value. Not invoked when empty.</param>
+    /// <returns>An optional holding the mapped value, or an empty optional.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="mapper"/> is <see langword="null"/>.</exception>
+    public Optional<TResult> Map<TResult>(Func<T, TResult?> mapper) where TResult : notnull
+    {
+        ArgumentNullException.ThrowIfNull(mapper);
+        return IsPresent ? Optional.OfNullable(mapper(_value)) : default;
+    }
+
+    /// <summary>Applies an optional-returning <paramref name="mapper"/> to the value, if present.</summary>
+    /// <typeparam name="TResult">The type of the value of the returned optional.</typeparam>
+    /// <param name="mapper">The function to apply to the value. Not invoked when empty.</param>
+    /// <returns>The optional returned by <paramref name="mapper"/>, or an empty optional.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="mapper"/> is <see langword="null"/>.</exception>
+    public Optional<TResult> FlatMap<TResult>(Func<T, Optional<TResult>> mapper) where TResult : notnull
+    {
+        ArgumentNullException.ThrowIfNull(mapper);
+        return IsPresent ? mapper(_value) : default;
+    }
+
+    /// <summary>Keeps the value only if it matches <paramref name="predicate"/>.</summary>
+    /// <param name="predicate">The condition the value must satisfy. Not invoked when empty.</param>
+    /// <returns>This optional if it is present and the value matches; otherwise an empty optional.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="predicate"/> is <see langword="null"/>.</exception>
+    public Optional<T> Filter(Func<T, bool> predicate)
+    {
+        ArgumentNullException.ThrowIfNull(predicate);
+        return IsPresent && predicate(_value) ? this : default;
+    }
 }
