@@ -68,6 +68,9 @@ tessaro-optional/
 ├── CLAUDE.md · README.md · LICENSE
 ```
 
+*Amended 2026-11-08 (T03, [ADR 0004](../../docs/adr/0004-namespace-tessaro.md)):* public types live in the
+namespace `Tessaro` (not `Tessaro.Optional`); tests in `Tessaro.Tests`. Package and folder names are unchanged.
+
 The struct is split into `partial` files by concern (Single Responsibility at file level) so each
 file maps to one or two user stories and stays small.
 

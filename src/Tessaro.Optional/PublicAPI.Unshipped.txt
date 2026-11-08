@@ -1,1 +1,11 @@
 #nullable enable
+static Tessaro.Optional.Empty<T>() -> Tessaro.Optional<T>
+static Tessaro.Optional.Of<T>(T value) -> Tessaro.Optional<T>
+static Tessaro.Optional.OfNullable<T>(T? value) -> Tessaro.Optional<T>
+static Tessaro.OptionalExtensions.ToOptional<T>(this T? value) -> Tessaro.Optional<T>
+Tessaro.Optional
+Tessaro.Optional<T>
+Tessaro.Optional<T>.IsEmpty.get -> bool
+Tessaro.Optional<T>.IsPresent.get -> bool
+Tessaro.Optional<T>.Optional() -> void
+Tessaro.OptionalExtensions

@@ -72,12 +72,10 @@ jobs:
       - name: Build
         run: dotnet build "$SOLUTION" -c Release --no-restore
 
-      # TODO(T03, #4): remove --ignore-exit-code 8 once the first tests exist.
       - name: Test with coverage gate (80 % line and branch)
         run: >
           dotnet test --solution "$SOLUTION" -c Release --no-build
           --results-directory TestResults
-          --ignore-exit-code 8
           --coverlet --coverlet-output-format opencover
           --coverlet-threshold 80
           --coverlet-threshold-type line --coverlet-threshold-type branch

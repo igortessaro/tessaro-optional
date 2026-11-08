@@ -5,8 +5,10 @@
     <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>Tessaro.Tests</RootNamespace>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Docs file stays on so IDE0005 (unused usings) runs on build; tests need no XML docs. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
