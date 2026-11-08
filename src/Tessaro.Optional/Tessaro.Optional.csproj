@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
-    <RootNamespace>Tessaro.Optional</RootNamespace>
+    <RootNamespace>Tessaro</RootNamespace>
 
     <PackageId>Tessaro.Optional</PackageId>
     <Description>Java's Optional, the .NET way: model absence explicitly with a fluent, zero-dependency API.</Description>

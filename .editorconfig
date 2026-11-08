@@ -52,3 +52,5 @@ dotnet_diagnostic.IDE0005.severity = warning
 [tests/**.cs]
 # Test names use Member_Scenario_ExpectedResult.
 dotnet_diagnostic.CA1707.severity = none
+# Tests use explicit types where they make nullability or overload binding visible.
+dotnet_diagnostic.IDE0007.severity = suggestion
