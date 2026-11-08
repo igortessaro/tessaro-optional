@@ -4,6 +4,7 @@
 > with expressive, fluent code.
 
 [![CI](https://github.com/igortessaro/tessaro-optional/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/igortessaro/tessaro-optional/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/vpre/Tessaro.Optional)](https://www.nuget.org/packages/Tessaro.Optional)
 
 ```csharp
 using Tessaro;
@@ -23,13 +24,15 @@ string city = FindUser(id)               // Optional<User>
 
 ## Installation
 
-> **Not on NuGet yet.** Spec 001 is implemented; the release workflow is the next planned step.
-
-Once published:
-
 ```bash
 dotnet add package Tessaro.Optional
 ```
+
+The package is on [nuget.org](https://www.nuget.org/packages/Tessaro.Optional). Versions follow
+SemVer; before `1.0.0`, a minor version may change the public API. Every release is built and
+published by CI from a tag on `main`, with
+[build provenance](https://github.com/igortessaro/tessaro-optional/attestations) you can check
+with `gh attestation verify <file>.nupkg --repo igortessaro/tessaro-optional`.
 
 Everything lives in the `Tessaro` namespace ([ADR 0004](https://github.com/igortessaro/tessaro-optional/blob/main/docs/adr/0004-namespace-tessaro.md)):
 
