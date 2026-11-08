@@ -163,6 +163,7 @@ public static class OptionalExtensions
 | `OrElseThrow(factory)` and `factory()` returns `null` | throws `InvalidOperationException` | Fail fast with a meaningful message instead of `NullReferenceException` (Java throws NPE) |
 | `Map` with a value-type `TResult` | never produces empty from the mapper | `TResult?` is not `Nullable<T>` for unconstrained generics; nullable value types are deferred to v1.1 (spec §8.1) |
 | `AsEnumerable()` | returns `[value]` or `Array.Empty<T>()` | Simplest correct implementation; allocates (excluded from NFR-2, it is an exit to collection-land) |
+| LINQ query with a clause between two `from`s (e.g. `from a … from b … where … select …`) | allocates one compiler-generated anonymous object per evaluation (24 bytes for two `int`s) | C# translates it with a *transparent identifier* `(a, b) => new { a, b }`; not avoidable by a library (IEnumerable LINQ pays it too). The library members themselves are allocation-free — use method syntax with a tuple on hot paths. Measured and amended 2026-11-08, T09 |
 | `ToString()` of a present value | `Optional[value]`, formatted with the invariant culture | Same as Java; invariant culture keeps logs deterministic (e.g. `Optional[1.5]` under pt-BR) — amended 2026-11-08, T04 |
 
 ---
