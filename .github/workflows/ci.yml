@@ -5,6 +5,7 @@ on:
     branches: [main]
   push:
     branches: [main]
+  workflow_call: # reused by release.yml; called without secrets, so the SonarCloud steps skip themselves
 
 permissions:
   contents: read
@@ -40,6 +41,12 @@ jobs:
 
       - name: ShellCheck # preinstalled on GitHub-hosted Ubuntu runners
         run: shellcheck .github/scripts/*.sh tests/scripts/*.sh
+
+      - name: actionlint # lints the workflows, including the shell inside run steps
+        run: >
+          docker run --rm --volume "$PWD:/repo" --workdir /repo
+          rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+          -color
 
       - name: Script tests
         run: |
