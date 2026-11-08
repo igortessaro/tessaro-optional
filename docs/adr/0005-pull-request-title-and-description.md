@@ -26,6 +26,8 @@ The version comes from git tags (MinVer), so no tool in this repository parses c
 
 - The summary starts with a capital letter and an imperative verb ("Add", "Fix", "Document"), has
   no trailing period, and the whole title stays within 72 characters.
+- **Exception for `Deps`:** Dependabot writes the summary itself (lower-case `bump …`, often longer
+  than 72 characters, and not configurable), so a `Deps | ` title only needs the prefix.
 - No issue number in the title: `Closes #N` goes in the body and the squash merge appends `(#PR)`.
 - The squash commit subject on `main` is the PR title followed by ` (#PR)`.
 - Commits on feature branches may keep Conventional Commits; they are squashed away.
