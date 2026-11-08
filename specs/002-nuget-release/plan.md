@@ -117,6 +117,8 @@ green once on a PR (the chicken-and-egg lesson from plan 001).
 | `dotnet pack` writes the `.nupkg` before package validation fails | the job fails and the artifact is never uploaded | Spiked (R2): the file exists on disk even on failure, so upload is a later step that runs only on success |
 | README relative links (`docs/adr/…`) | rewritten as absolute `https://github.com/igortessaro/tessaro-optional/blob/main/…` URLs | nuget.org does not resolve relative links (AC-3.1) |
 | Release notes content | GitHub's default generated notes (PR titles since the previous tag) | ADR 0005 makes titles readable; categories by label are deferred |
+| Shell for `run:` steps in `release.yml` | `defaults.run.shell: bash` (= `bash -eo pipefail`); the guard output is captured before `tee`, the nuspec is read before `grep -q` | Without an explicit shell, Actions runs `bash -e` without `pipefail`, so `script \| tee` would hide a rejection; with `pipefail`, `unzip \| grep -q` can fail by SIGPIPE and hide a dependency — amended 2026-11-08, T03 |
+| Workflow linting | `actionlint` runs in the CI `scripts` job (Docker image pinned by digest), not once locally | Docker was not running locally; in CI it guards every later workflow change too — amended 2026-11-08, T03 |
 | Moving `PublicAPI.Unshipped.txt` to `Shipped` | done in the release-preparation PR, including for prereleases | A prerelease on nuget.org is public, so its API counts as shipped |
 
 ## 4. Build configuration
