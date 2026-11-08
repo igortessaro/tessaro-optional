@@ -32,6 +32,21 @@ jobs:
       - name: Verify formatting
         run: dotnet format "$SOLUTION" --verify-no-changes
 
+  scripts:
+    name: scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: ShellCheck # preinstalled on GitHub-hosted Ubuntu runners
+        run: shellcheck .github/scripts/*.sh tests/scripts/*.sh
+
+      - name: Script tests
+        run: |
+          for test in tests/scripts/*.test.sh; do
+            bash "$test"
+          done
+
   build-test:
     name: build-test
     runs-on: ubuntu-latest
