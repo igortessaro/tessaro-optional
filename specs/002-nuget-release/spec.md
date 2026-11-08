@@ -1,6 +1,7 @@
 # Spec 002 — NuGet release
 
-**Status:** Approved (2026-11-08) · **Created:** 2026-11-08
+**Status:** Implemented (2026-11-08) — AC-5.3 awaits the first Dependabot PR ([#34](https://github.com/igortessaro/tessaro-optional/issues/34)) · **Approved:** 2026-11-08 · **Created:** 2026-11-08
+**Verification:** [verification.md](verification.md) · **Retrospective:** [retrospective.md](retrospective.md)
 **Constitution:** [v1.2.0](../../docs/constitution.md) · **ADRs:** [0005](../../docs/adr/0005-pull-request-title-and-description.md)
 
 > This spec defines **what** a release offers and **why**. Workflows, actions and tooling belong

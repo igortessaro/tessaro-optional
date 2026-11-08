@@ -2,6 +2,7 @@
 
 **Status:** Approved (2026-11-08) · **Created:** 2026-11-08
 **Spec:** [002](spec.md) (Approved 2026-11-08) · **Plan:** [002](plan.md) (Approved 2026-11-08)
+**Verification:** [verification.md](verification.md) · **Retrospective:** [retrospective.md](retrospective.md) (2026-11-08)
 
 > Ordered, small, independently verifiable steps that implement plan 002. Each task is **one
 > branch and one pull request**. Tasks run in order: each one builds on the merged result of the
