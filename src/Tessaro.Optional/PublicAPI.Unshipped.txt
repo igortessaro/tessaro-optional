@@ -4,6 +4,8 @@ Tessaro.Optional<T>
 Tessaro.Optional<T>.Equals(Tessaro.Optional<T> other) -> bool
 Tessaro.Optional<T>.Filter(System.Func<T, bool>! predicate) -> Tessaro.Optional<T>
 Tessaro.Optional<T>.FlatMap<TResult>(System.Func<T, Tessaro.Optional<TResult>>! mapper) -> Tessaro.Optional<TResult>
+Tessaro.Optional<T>.IfPresent(System.Action<T>! action) -> void
+Tessaro.Optional<T>.IfPresentOrElse(System.Action<T>! action, System.Action! emptyAction) -> void
 Tessaro.Optional<T>.IsEmpty.get -> bool
 Tessaro.Optional<T>.IsPresent.get -> bool
 Tessaro.Optional<T>.Map<TResult>(System.Func<T, TResult?>! mapper) -> Tessaro.Optional<TResult>
