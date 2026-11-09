@@ -47,9 +47,10 @@ run() {
 }
 
 expect_output() { # <expected stdout>
-  if [ "$code" -ne 0 ] || [ "$out" != "$1" ]; then
+  local expected="$1"
+  if [[ "$code" -ne 0 || "$out" != "$expected" ]]; then
     fail_case "expected exit 0 and:
-$1
+$expected
   got exit $code and:
 $out
   stderr: $err"
@@ -57,8 +58,9 @@ $out
 }
 
 expect_error() { # <substring of stderr>
-  if [ "$code" -ne 1 ] || [[ "$err" != *"$1"* ]]; then
-    fail_case "expected exit 1 with '$1' on stderr; got exit $code, stderr: $err, stdout: $out"
+  local fragment="$1"
+  if [[ "$code" -ne 1 || "$err" != *"$fragment"* ]]; then
+    fail_case "expected exit 1 with '$fragment' on stderr; got exit $code, stderr: $err, stdout: $out"
   fi
 }
 
@@ -189,4 +191,4 @@ prerelease=false
 baseline=0.1.0"
 
 echo "release-info: $((cases - failures))/$cases passed"
-[ "$failures" -eq 0 ]
+[[ "$failures" -eq 0 ]]

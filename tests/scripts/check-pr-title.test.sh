@@ -16,15 +16,15 @@ run_case() { # <expected: pass|fail> <title>
   local expected="$1" title="$2" actual output
   cases=$((cases + 1))
   if output="$(bash "$script" "$title" 2>&1)"; then actual=pass; else actual=fail; fi
-  if [ "$actual" != "$expected" ]; then
+  if [[ "$actual" != "$expected" ]]; then
     failures=$((failures + 1))
     printf 'FAIL [%s] %s\n  title:    %s\n  expected: %s, got: %s\n  output:   %s\n' \
       "$current_ac" "$current_desc" "$title" "$expected" "$actual" "$output"
   fi
 }
 
-expect_pass() { run_case pass "$1"; }
-expect_fail() { run_case fail "$1"; }
+expect_pass() { local title="$1"; run_case pass "$title"; }
+expect_fail() { local title="$1"; run_case fail "$title"; }
 
 ac "AC-5.1" "a task title passes";                       expect_pass "Spec 012 (T03) | Document the public API"
 ac "AC-5.1" "a spec-phase title passes";                 expect_pass "Spec 012 | Add the release spec"
@@ -55,4 +55,4 @@ if [[ "$output" != *"<Context> | <Imperative summary>"* || "$output" != *"Spec 0
 fi
 
 echo "check-pr-title: $((cases - failures))/$cases passed"
-[ "$failures" -eq 0 ]
+[[ "$failures" -eq 0 ]]
