@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Release guard (spec 002, plan §3.2): validates a release tag and computes what the release needs.
+# Release guard: validates a release tag and computes what the release needs.
 #
 # Usage: release-info.sh <tag> <sha>
 #   Run inside the repository with full history and tags, and with origin/main fetched.
@@ -27,7 +27,7 @@ major="${BASH_REMATCH[1]}"
 minor="${BASH_REMATCH[2]}"
 prerelease_part="${BASH_REMATCH[4]}"
 
-# AC-1.3: only commits that are on main can be released.
+# Only commits that are on main can be released.
 git merge-base --is-ancestor "$sha" origin/main 2>/dev/null || fail "the tagged commit is not on main ($sha)"
 
 # Closest earlier version tag in the history of $sha, ignoring the tag being released and any
@@ -42,7 +42,7 @@ while candidate="$(git describe --tags --abbrev=0 --match 'v*' "${excludes[@]}" 
   excludes+=(--exclude "$candidate")
 done
 
-# AC-3.5: a breaking change needs a major bump from 1.0.0 on, or a minor bump in 0.y (SemVer §4).
+# A breaking change needs a major bump from 1.0.0 on, or a minor bump in 0.y (SemVer §4).
 baseline=""
 if [ -n "$previous" ]; then
   [[ "$previous" =~ $semver ]]

@@ -1,6 +1,6 @@
 name: PR title
 
-# Enforces the pull request title standard (ADR 0005, spec 002 US-5).
+# Enforces the pull request title standard (ADR 0005).
 on:
   pull_request:
     branches: [main]

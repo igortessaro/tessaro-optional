@@ -1,6 +1,6 @@
 name: Release
 
-# Publishes Tessaro.Optional to nuget.org when the owner pushes a version tag (spec 002, plan 002 §3.1):
+# Publishes Tessaro.Optional to nuget.org when the owner pushes a version tag:
 #   guard → ci (quality gates) → pack (API validation) → publish (owner approval, nuget.org, GitHub Release)
 on:
   push:
@@ -88,7 +88,7 @@ jobs:
           fi
           nuspec="$(unzip -p "$nupkg" '*.nuspec')" # read first: with pipefail, grep -q could SIGPIPE unzip
           if grep -q '<dependency ' <<<"$nuspec"; then
-            echo "::error::The package must have no dependencies (spec 001 NFR-1)"
+            echo "::error::The package must have no dependencies (zero-dependency rule)"
             exit 1
           fi
 
@@ -106,7 +106,7 @@ jobs:
     needs: [guard, pack]
     runs-on: ubuntu-latest
     environment:
-      name: release # the owner approves here (AC-1.6); nuget.org trusts only this environment
+      name: release # the owner approves here; nuget.org trusts only this environment
       url: https://www.nuget.org/packages/Tessaro.Optional/${{ needs.guard.outputs.version }}
     permissions:
       contents: write     # create the GitHub Release
@@ -129,7 +129,7 @@ jobs:
         with:
           user: ${{ secrets.NUGET_USER }}
 
-      - name: Push to nuget.org # no --skip-duplicate: an existing version fails the release (AC-1.5)
+      - name: Push to nuget.org # no --skip-duplicate: an existing version fails the release
         env:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         run: dotnet nuget push "artifacts/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json

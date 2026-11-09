@@ -20,7 +20,7 @@ Reason: $1
 Expected: <Context> | <Imperative summary>   (ADR 0005, docs/adr/0005-pull-request-title-and-description.md)
   Context: Spec NNN (TNN), Spec NNN, Hotfix, Deps or Chore
   Summary: starts with a capital imperative verb, no trailing period; whole title at most $max_length characters
-Example: Spec 001 (T10) | Document Optional<T> usage
+Example: Spec 012 (T03) | Document the public API
 EOF
   exit 1
 }
