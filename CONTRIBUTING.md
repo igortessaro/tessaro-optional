@@ -9,7 +9,7 @@ task list under [`specs/`](specs/), checked against the [constitution](docs/cons
 - **Branches:** trunk-based, short-lived branches off `main` with Gitflow prefixes:
   `feature/NNN-slug`, `hotfix/slug`, `release/x.y.z`.
 - **Pull requests:** title `<Context> | <Imperative summary>`, e.g.
-  `Spec 001 (T10) | Document Optional<T> usage`. The description follows the PR template:
+  `Spec 012 (T03) | Document the public API`. The description follows the PR template:
   Summary, Changes, Testing, Notes for reviewer, Checklist, then `Closes #N`
   ([ADR 0005](docs/adr/0005-pull-request-title-and-description.md)). The `pr-title` check enforces
   the title.
@@ -25,7 +25,7 @@ A release is one tag pushed by the owner. [`release.yml`](.github/workflows/rele
 2. runs every quality gate;
 3. packs with an API compatibility check;
 4. after the owner approves, publishes to nuget.org and creates the GitHub Release
-   ([spec 002](specs/002-nuget-release/spec.md)).
+   (see the release spec under [`specs/`](specs/)).
 
 Every service involved is free for this public repository.
 

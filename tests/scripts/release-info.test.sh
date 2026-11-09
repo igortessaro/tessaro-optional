@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Tests for .github/scripts/release-info.sh (spec 002: AC-1.2, AC-1.3, AC-3.5; rules in plan 002 §3.2).
+# Tests for .github/scripts/release-info.sh (tag validation, main-only releases, breaking-change baseline).
 # Each case builds a throwaway git repository with tags and a fake origin/main.
 # Cases start with `ac "<id>" ...`; AC IDs are found by the AC traceability check.
 
@@ -76,7 +76,7 @@ new_repo; publish_main
 code=0; err="$(bash "$script" 2>&1 >/dev/null)" || code=$?
 expect_error "usage:"
 
-# --- AC-1.3: the tagged commit must be on main --------------------------------------------------
+# --- The tagged commit must be on main ----------------------------------------------------------
 
 ac "AC-1.3" "a commit on a branch that is not main is rejected"
 new_repo; publish_main
@@ -97,7 +97,7 @@ expect_output "version=0.0.1
 prerelease=false
 baseline="
 
-# --- AC-1.2: prerelease flag --------------------------------------------------------------------
+# --- Prerelease flag ----------------------------------------------------------------------------
 
 ac "AC-1.2" "a prerelease tag sets prerelease=true"
 new_repo; publish_main; git tag v0.0.1-rc.1
@@ -113,7 +113,7 @@ expect_output "version=1.0.0+build.5
 prerelease=false
 baseline="
 
-# --- AC-3.5: baseline for the breaking-change check ---------------------------------------------
+# --- Baseline for the breaking-change check -----------------------------------------------------
 
 ac "AC-3.5" "no earlier tag: no baseline"
 new_repo; publish_main; git tag v0.0.1

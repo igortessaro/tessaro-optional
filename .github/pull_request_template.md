@@ -1,7 +1,7 @@
 <!--
 Title: <Context> | <Imperative summary>   (ADR 0005, max 72 characters)
-  Spec 001 (T10) | Document Optional<T> usage
-  Spec 002 | Add NuGet release spec
+  Spec 012 (T03) | Document the public API
+  Spec 012 | Add the release spec
   Hotfix | … · Deps | … · Chore | …
 Omit any section below that does not apply; never leave one empty.
 -->
@@ -16,7 +16,7 @@ Omit any section below that does not apply; never leave one empty.
 
 ## Testing
 
-<!-- What was run and the real results. List the ACs covered, e.g. AC-1.1 – AC-1.7 (each with a [Trait("AC", "AC-x.y")] test). -->
+<!-- What was run and the real results. List the ACs covered, each with a [Trait("AC", "AC-x.y")] test. -->
 
 | Check | Result |
 |---|---|
