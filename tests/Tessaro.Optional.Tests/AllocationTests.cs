@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Tessaro.Tests;
 
 // NFR-2 — no heap allocation for creating, chaining or extracting optionals.
@@ -8,7 +10,8 @@ public class AllocationTests
 {
     private const int Iterations = 1_000;
 
-    // Keeps the JIT from discarding results.
+    // Keeps the JIT from discarding results: written on purpose, never read.
+    [SuppressMessage("Style", "IDE0052:Remove unread private member", Justification = "Write-only sink that keeps the JIT from discarding results.")]
     private static long _sink;
 
     private static long AllocatedBytes(Action scenario)
